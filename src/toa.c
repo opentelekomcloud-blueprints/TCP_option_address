@@ -99,8 +99,7 @@ static void *get_toa_data(struct sk_buff *skb)
  * @return return what the original inet_getname() returns.
  */
 static int
-inet_getname_toa(struct socket *sock, struct sockaddr *uaddr,
-		int *uaddr_len, int peer)
+inet_getname_toa(struct socket *sock, struct sockaddr *uaddr, int peer)
 {
 	int retval = 0;
 	struct sock *sk = sock->sk;
@@ -111,7 +110,7 @@ inet_getname_toa(struct socket *sock, struct sockaddr *uaddr,
 		sk->sk_user_data);
 
 	/* call orginal one */
-	retval = inet_getname(sock, uaddr, uaddr_len, peer);
+	retval = inet_getname(sock, uaddr, peer);
 
 	/* set our value if need */
 	if (retval == 0 && NULL != sk->sk_user_data && peer) {
